@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MUSIC RADAR</title>
+<meta name="description" content="Radar personal de lanzamientos musicales: que salio, que viene y que vale la pena escuchar.">
+<meta name="theme-color" content="#0a0a0c">
+<link rel="icon" href="assets/icon.svg">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-view="releases">
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">MUSIC <b>RADAR</b> <span id="greet"></span></div>
+    <div class="grow"></div>
+    <label class="search">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6c6c7a" stroke-width="2.4">
+        <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
+      </svg>
+      <input id="q" type="search" placeholder="Buscar artista o disco…" autocomplete="off">
+    </label>
+    <div class="clock" id="clock"></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="tabs" id="tabs">
+    <button class="tab on" data-go="releases">Salió <span class="n" id="n-releases">0</span></button>
+    <button class="tab" data-go="upcoming">Viene <span class="n" id="n-upcoming">0</span></button>
+    <button class="tab" data-go="editorial">Descubre <span class="n" id="n-editorial">0</span></button>
+    <button class="tab" data-go="mine">Mi música <span class="n" id="n-mine">0</span></button>
+    <button class="tab" data-go="stats">Memoria</button>
+  </nav>
+
+  <section id="v-releases">
+    <div class="vhead"><div class="rule"></div>
+      <h2>Salió hace poco</h2>
+      <p>Álbumes, EPs y sencillos de las últimas tres semanas. La estrella marca a un artista como tuyo.</p>
+    </div>
+    <div class="grid" id="grid-releases"></div>
+  </section>
+
+  <section id="v-upcoming" class="hide">
+    <div class="vhead"><div class="rule"></div>
+      <h2>Lo que viene</h2>
+      <p>Lanzamientos ya anunciados con fecha. Marca artistas y este calendario se llenará de lo tuyo.</p>
+    </div>
+    <div id="timeline"></div>
+  </section>
+
+  <section id="v-editorial" class="hide">
+    <div class="vhead"><div class="rule"></div>
+      <h2>Para descubrir</h2>
+      <p>Lo que están escribiendo NPR, Bandcamp Daily, The Quietus, Pitchfork, Billboard y Consequence.</p>
+    </div>
+    <div class="reads" id="reads"></div>
+  </section>
+
+  <section id="v-mine" class="hide">
+    <div class="vhead"><div class="rule"></div>
+      <h2>Mi música</h2>
+      <p>Tus artistas marcados. Se consultan en vivo, no esperan al robot de mañana.</p>
+    </div>
+    <div class="tools">
+      <button class="btn p" id="add">＋ Buscar artista para seguir</button>
+      <button class="btn" id="export">Exportar mi lista</button>
+      <button class="btn" id="clear-heard">Olvidar lo escuchado</button>
+    </div>
+    <div class="results hide" id="results"></div>
+    <div class="artists" id="artists"></div>
+    <div id="mine-body"></div>
+  </section>
+
+  <section id="v-stats" class="hide">
+    <div class="vhead"><div class="rule"></div>
+      <h2>Memoria</h2>
+      <p>Qué tan movido está el mes, quién está publicando y cuánto llevas escuchado.</p>
+    </div>
+    <div class="stats" id="stats"></div>
+  </section>
+
+  <footer class="foot" id="foot"></footer>
+</main>
+
+<script src="assets/js/store.js"></script>
+<script src="assets/js/render.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

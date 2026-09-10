@@ -1,0 +1,196 @@
+/* MUSIC RADAR — la caratula manda. Oscuro, denso, sin dependencias. */
+:root{
+  --bg:#0a0a0c; --bg2:#111116; --card:#16161d; --line:#26262f;
+  --tx:#f2f2f5; --tx2:#a0a0ae; --tx3:#6c6c7a;
+  --acc:#ff4d6d;        /* salio */
+  --acc2:#5b8cff;       /* viene */
+  --acc3:#ffc24d;       /* descubre */
+  --acc4:#3ddc97;       /* mio */
+  --r:12px; --w:1400px;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--tx); font-family:var(--sans);
+  -webkit-font-smoothing:antialiased; line-height:1.45;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 20px}
+
+/* ---------- topbar ---------- */
+.top{
+  position:sticky;top:0;z-index:50;background:rgba(10,10,12,.86);
+  backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid var(--line);
+}
+.top .wrap{display:flex;align-items:center;gap:18px;height:60px}
+.brand{display:flex;align-items:baseline;gap:9px;font-weight:800;letter-spacing:-.02em;font-size:19px}
+.brand b{color:var(--acc)}
+.brand span{font:600 10px/1 var(--mono);letter-spacing:.16em;color:var(--tx3);text-transform:uppercase}
+.top .grow{flex:1}
+.search{
+  display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--line);
+  border-radius:999px;padding:7px 14px;min-width:210px;
+}
+.search input{background:none;border:0;outline:0;color:var(--tx);width:100%;font-size:13px}
+.search input::placeholder{color:var(--tx3)}
+.clock{font:500 12px/1 var(--mono);color:var(--tx3);white-space:nowrap}
+
+/* ---------- nav de vistas ---------- */
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:16px 0 14px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  display:flex;align-items:center;gap:8px;padding:8px 15px;border-radius:999px;
+  border:1px solid var(--line);color:var(--tx2);font-size:13.5px;font-weight:600;
+  white-space:nowrap;transition:.18s;
+}
+.tab:hover{color:var(--tx);border-color:#3a3a46}
+.tab.on{background:var(--tx);color:#0a0a0c;border-color:var(--tx)}
+.tab .n{font:600 11px/1 var(--mono);opacity:.6}
+
+/* ---------- encabezado de vista ---------- */
+.vhead{display:flex;align-items:flex-end;gap:14px;margin:6px 0 20px;flex-wrap:wrap}
+.vhead h2{margin:0;font-size:27px;font-weight:800;letter-spacing:-.03em}
+.vhead p{margin:0;color:var(--tx2);font-size:13.5px;flex:1;min-width:200px}
+.rule{height:3px;border-radius:2px;width:44px;background:var(--acc);margin-bottom:9px}
+[data-view="upcoming"] .rule{background:var(--acc2)}
+[data-view="editorial"] .rule{background:var(--acc3)}
+[data-view="mine"] .rule{background:var(--acc4)}
+
+/* ---------- grid de discos ---------- */
+.grid{
+  display:grid;gap:22px 18px;align-items:start;
+  grid-template-columns:repeat(auto-fill,minmax(168px,1fr));
+  padding-bottom:40px;
+}
+.disc{position:relative}
+.cover{
+  display:block;position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;
+  background:var(--card);border:1px solid var(--line);
+}
+.cover img{width:100%;height:100%;object-fit:cover;display:block;transition:.35s}
+.disc:hover .cover img{transform:scale(1.05)}
+.cover.none{display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:var(--tx3);font-size:30px}
+.badge{
+  position:absolute;left:8px;top:8px;padding:3px 8px;border-radius:6px;
+  font:700 9.5px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  background:rgba(10,10,12,.82);backdrop-filter:blur(6px);color:var(--tx);
+}
+.badge.single{color:#ffb3c1}.badge.ep{color:#ffd98a}.badge.album{color:#9ec5ff}
+.star{
+  position:absolute;right:6px;top:6px;width:30px;height:30px;border-radius:50%;
+  display:grid;place-items:center;font-size:15px;line-height:1;
+  background:rgba(10,10,12,.78);backdrop-filter:blur(6px);color:var(--tx3);
+  opacity:0;transition:.18s;
+}
+.disc:hover .star,.star.on{opacity:1}
+.star.on{color:var(--acc3)}
+.star:hover{transform:scale(1.12)}
+.meta{padding:10px 2px 0}
+.meta .a,.meta .t{
+  display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;
+}
+.meta .a{font-weight:700;font-size:13.5px;letter-spacing:-.01em;-webkit-line-clamp:1}
+.meta .t{color:var(--tx2);font-size:12.5px;margin-top:2px;-webkit-line-clamp:2}
+.meta .d{color:var(--tx3);font:500 10.5px/1.5 var(--mono);margin-top:5px;letter-spacing:.04em}
+.disc.heard .cover{opacity:.42}
+.disc.heard .meta{opacity:.55}
+.mio{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--acc4);vertical-align:middle;margin-right:5px}
+
+/* ---------- linea de tiempo ---------- */
+.month{margin-bottom:30px}
+.month h3{
+  margin:0 0 12px;font:700 11px/1 var(--mono);letter-spacing:.16em;
+  text-transform:uppercase;color:var(--acc2);
+}
+.row{
+  display:flex;align-items:center;gap:14px;padding:11px 14px;border-radius:10px;
+  border:1px solid var(--line);background:var(--card);margin-bottom:7px;transition:.16s;
+}
+.row:hover{border-color:#3a3a46;transform:translateX(3px)}
+.row .day{
+  flex:0 0 46px;text-align:center;font:700 17px/1 var(--sans);letter-spacing:-.02em;
+}
+.row .day s{display:block;text-decoration:none;font:600 9px/1.6 var(--mono);color:var(--tx3);text-transform:uppercase}
+.row .info{flex:1;min-width:0}
+.row .info b{display:block;font-size:14px;font-weight:700}
+.row .info span{color:var(--tx2);font-size:12.5px}
+.row .tag{font:600 9.5px/1 var(--mono);color:var(--tx3);text-transform:uppercase;letter-spacing:.08em}
+
+/* ---------- editorial ---------- */
+.reads{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));padding-bottom:40px}
+.read{
+  display:flex;gap:13px;padding:13px;border-radius:11px;background:var(--card);
+  border:1px solid var(--line);transition:.16s;
+}
+.read:hover{border-color:#3a3a46;background:#1a1a22}
+.read img{width:76px;height:76px;border-radius:8px;object-fit:cover;flex:0 0 76px;background:var(--bg2)}
+.read .b{min-width:0}
+.read .s{font:700 9.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--acc3)}
+.read h4{margin:6px 0 0;font-size:13.8px;font-weight:600;line-height:1.35}
+.read time{display:block;margin-top:6px;color:var(--tx3);font:500 10.5px/1 var(--mono)}
+
+/* ---------- vista mio ---------- */
+.hint{
+  border:1px dashed var(--line);border-radius:var(--r);padding:26px;text-align:center;
+  color:var(--tx2);font-size:14px;line-height:1.6;
+}
+.hint b{color:var(--tx);display:block;font-size:16px;margin-bottom:7px}
+.hint code{font-family:var(--mono);font-size:12px;color:var(--acc4);background:var(--bg2);padding:2px 6px;border-radius:5px}
+.artists{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.chip{
+  display:flex;align-items:center;gap:8px;padding:7px 8px 7px 13px;border-radius:999px;
+  background:var(--card);border:1px solid var(--line);font-size:13px;font-weight:600;
+}
+.chip button{color:var(--tx3);font-size:15px;line-height:1;padding:0 3px}
+.chip button:hover{color:var(--acc)}
+.tools{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px}
+.btn{
+  padding:8px 15px;border-radius:9px;border:1px solid var(--line);background:var(--card);
+  font-size:12.5px;font-weight:600;color:var(--tx2);transition:.16s;
+}
+.btn:hover{color:var(--tx);border-color:#3a3a46}
+.btn.p{background:var(--acc4);color:#08120d;border-color:var(--acc4)}
+.results{display:grid;gap:7px;margin-bottom:24px}
+.res{
+  display:flex;align-items:center;gap:12px;padding:9px 13px;border-radius:9px;
+  background:var(--card);border:1px solid var(--line);
+}
+.res img{width:38px;height:38px;border-radius:6px;object-fit:cover;background:var(--bg2)}
+.res .n{flex:1;font-size:13.5px;font-weight:600}
+.res .g{font:500 10.5px/1 var(--mono);color:var(--tx3)}
+
+/* ---------- estadistica ---------- */
+.stats{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));padding-bottom:40px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:17px}
+.panel h3{margin:0 0 14px;font:700 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--tx3)}
+.bar{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-size:12.5px}
+.bar .l{flex:0 0 40%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.bar .t{flex:1;height:7px;border-radius:4px;background:var(--bg2);overflow:hidden}
+.bar .t i{display:block;height:100%;border-radius:4px;background:var(--acc)}
+.bar .v{font:600 11px/1 var(--mono);color:var(--tx3);flex:0 0 26px;text-align:right}
+.kpis{display:flex;gap:22px;flex-wrap:wrap}
+.kpi b{display:block;font-size:25px;font-weight:800;letter-spacing:-.03em}
+.kpi span{font:600 9.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--tx3)}
+.spark{width:100%;height:52px;display:block;margin-top:6px}
+
+/* ---------- pie / vacio ---------- */
+.foot{border-top:1px solid var(--line);margin-top:20px;padding:18px 0 44px;color:var(--tx3);font:500 11.5px/1.7 var(--mono)}
+.foot b{color:var(--tx2)}
+.empty{color:var(--tx3);text-align:center;padding:56px 20px;font-size:14px}
+.hide{display:none !important}
+
+@media(max-width:640px){
+  .top .wrap{height:auto;padding:11px 16px;flex-wrap:wrap;gap:10px}
+  .search{order:3;width:100%;min-width:0}
+  .clock{display:none}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(136px,1fr));gap:18px 13px}
+  /* En una columna el parrafo se colaba junto al titulo: que baje siempre. */
+  .vhead{align-items:center;gap:10px}
+  .vhead h2{font-size:22px}
+  .vhead p{flex:0 0 100%;order:3}
+  .rule{margin-bottom:0;width:30px}
+  .read img{width:60px;height:60px;flex:0 0 60px}
+}

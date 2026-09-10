@@ -1,0 +1,10 @@
+{
+  "feeds": [
+    "https://www.npr.org/rss/rss.php?id=1039",
+    "https://daily.bandcamp.com/feed",
+    "https://thequietus.com/feed/",
+    "https://www.billboard.com/feed/",
+    "https://pitchfork.com/rss/news/",
+    "https://consequence.net/feed/"
+  ]
+}
