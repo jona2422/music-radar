@@ -16,6 +16,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 25          # que un servidor colgado no bloquee la cola
     steps:
       - uses: actions/checkout@v4
 
